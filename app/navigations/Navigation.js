@@ -5,15 +5,40 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialIcons } from "@expo/vector-icons";
 //Screens
 import Search from "../screens/Search";
-import Details from "../screens/Details";
+import Repository from "../screens/Repository";
 
 const SearchStack = createStackNavigator();
 
 function SearchStackScreen() {
   return (
     <SearchStack.Navigator>
-      <SearchStack.Screen name="Search" component={Search} />
-      <SearchStack.Screen name="Details" component={Details} />
+      <SearchStack.Screen
+        name="Search"
+        component={Search}
+        options={{
+          title: "Search Github",
+          headerStyle: {
+            backgroundColor: "#0B212C",
+          },
+          headerTitleStyle: {
+            color: "#fff",
+          },
+        }}
+      />
+      <SearchStack.Screen
+        name="Repository"
+        component={Repository}
+        options={({ route }) => ({
+          title: route.params.repository.nameWithOwner,
+          headerStyle: {
+            backgroundColor: "#0B212C",
+          },
+          headerTitleStyle: {
+            color: "#fff",
+          },
+          headerTintColor: "#fff",
+        })}
+      />
     </SearchStack.Navigator>
   );
 }
@@ -25,7 +50,7 @@ export default function App() {
     <NavigationContainer>
       <Tab.Navigator
         tabBarOptions={{
-          activeTintColor: "blue",
+          activeTintColor: "#0B212C",
           inactiveTintColor: "gray",
         }}
       >
